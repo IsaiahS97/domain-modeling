@@ -17,20 +17,29 @@ CREATE TABLE students (
 -- Create the rest of the tables
 
 CREATE TABLE teachers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   first_name TEXT,
   last_name TEXT,
   bio TEXT
 );
 
 CREATE TABLE courses (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT,
   description TEXT
 );
 
 CREATE TABLE sections (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   time text, 
   course_id INTEGER,
   teacher_id INTEGER
+);
+
+CREATE TABLE enrollments (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  section_id INTEGER,
+  student_id INTEGER
 );
 
 
@@ -54,4 +63,8 @@ INSERT INTO sections (time, course_id, teacher_id)
 VALUES
   ('Tuesday 8:30-11:30',1,2), ('Wednesday 6-9pm', 1, 1), ('Wednesday 6-9pm', 2,2), ('Thursday 6-9pm', 2,1);
 
-  
+SELECT *
+FROM students AS A
+LEFT JOIN enrollments AS B
+ON A.id = B.student_id
+LEFT JOIN courses AS C;
